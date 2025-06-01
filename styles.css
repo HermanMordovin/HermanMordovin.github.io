@@ -1,0 +1,104 @@
+@-webkit-keyframes scroll {
+  from {
+    left: 0px;
+  }
+  50% {
+    left: -320px;
+  }
+  to {
+    left: -640px;
+  }
+}
+
+div {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-repeat: repeat-x;
+}
+
+div#back {
+  -webkit-animation: scroll 30s infinite linear;
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/9f/Sky_back_layer.png);
+}
+
+div#middle {
+  -webkit-animation: scroll 15s infinite linear;
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/8b/Vegetation_%28middle_layer%29.png);
+}
+
+div#front {
+  -webkit-animation: scroll 7s infinite linear;
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Ground_%28front_layer%29.png);
+}
+
+body {
+  background: #BC9447;
+}
+@import "compass/css3";
+
+html {font-family: arial; padding: 4em; }
+
+ul {
+  display: inline-block;
+  margin-right: 4em;
+  list-style: none;
+  padding: 0;
+  counter-reset: checkout_progress;
+}
+
+ul li {
+  position: relative;
+  z-index: 2;
+  &:not(:first-of-type) { margin-top: 0.5em; }
+}
+
+span {
+  display: table-cell;
+  vertical-align: middle;
+  text-indent: 0.5em;
+}
+
+$size: 2em;
+$border-size: 0.2em;
+
+ul li.current {
+  font-weight: bold;
+  color: black;
+  &:before {
+    background: green;
+    border-color: green;
+    color: white;
+  }
+}
+
+ul li { color: gray; }
+
+ul li:before {
+  position: relative;
+  z-index: 2;
+  // theme
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: $size - $border-size;
+  height: $size - $border-size;
+  background: white;
+  border-radius: 50%;
+  color: black;
+  border: $border-size solid #666;
+  // counter
+  content: counter(checkout_progress);
+  counter-increment: checkout_progress;
+}
+
+ul li:not(:last-of-type):after {
+  position: absolute;
+  z-index: 1;
+  content: "";
+  top: $size;
+  width: ($size)/2;
+  height: $size / 2;
+  border-right: $border-size solid #666;
+}
